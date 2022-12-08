@@ -38,9 +38,4 @@ function Footer() {
     </Box>
   );
 }
-
-Footer.propTypes = {
-  description: PropTypes.string.isRequired
-};
-
 export default Footer;

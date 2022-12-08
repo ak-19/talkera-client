@@ -1,25 +1,15 @@
-import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
+
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../header/Header';
 import MainFeaturedArticle from '../mainarticle/MainArticle';
 import Footer from '../footer/Footer';
-import Article from '../article/Article';
 
-const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { getArticlesData, selectArticles } from '../../store/articles';
+import { useEffect } from 'react';
+import Articles from '../articles/Articles';
 
 const mainFeaturedArticle = {
   title: 'Title of a longer featured blog post',
@@ -30,43 +20,32 @@ const mainFeaturedArticle = {
   linkText: 'Continue reading…',
 };
 
-const featuredPosts = [
-  {
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
-  },
-];
-
 const theme = createTheme();
 
 export default function Blog() {
+  const articles = useSelector(selectArticles);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function go() {
+      dispatch(getArticlesData());
+    }
+    go();
+  }, [dispatch]);
+
+  if (articles) console.log(articles);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Talkera" sections={sections} />
+        <Header />
         <main>
           <MainFeaturedArticle post={mainFeaturedArticle} />
-          <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <Article key={post.title} post={post} />
-            ))}
-          </Grid>
+          <Articles articles={articles} />
         </main>
       </Container>
-      <Footer/>
+      <Footer />
     </ThemeProvider>
   );
 }
