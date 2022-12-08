@@ -10,7 +10,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        talkera.com
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -18,14 +18,12 @@ function Copyright() {
   );
 }
 
-function Footer(props) {
-  const { description, title } = props;
-
+function Footer() {
   return (
     <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6 }}>
       <Container maxWidth="lg">
         <Typography variant="h6" align="center" gutterBottom>
-          {title}
+          Talkera
         </Typography>
         <Typography
           variant="subtitle1"
@@ -33,7 +31,7 @@ function Footer(props) {
           color="text.secondary"
           component="p"
         >
-          {description}
+          Creative people home
         </Typography>
         <Copyright />
       </Container>
@@ -42,8 +40,7 @@ function Footer(props) {
 }
 
 Footer.propTypes = {
-  description: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired
 };
 
 export default Footer;

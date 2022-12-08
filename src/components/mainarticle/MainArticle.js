@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
-function MainFeaturedPost(props) {
+function MainFeaturedArticle(props) {
   const { post } = props;
 
   return (
@@ -59,7 +59,7 @@ function MainFeaturedPost(props) {
   );
 }
 
-MainFeaturedPost.propTypes = {
+MainFeaturedArticle.propTypes = {
   post: PropTypes.shape({
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
@@ -69,4 +69,4 @@ MainFeaturedPost.propTypes = {
   }).isRequired,
 };
 
-export default MainFeaturedPost;
+export default MainFeaturedArticle;
