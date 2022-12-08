@@ -1,14 +1,7 @@
-import CssBaseline from '@mui/material/CssBaseline';
-
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Header from '../header/Header';
-import MainFeaturedArticle from '../mainarticle/MainArticle';
-import Footer from '../footer/Footer';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { getArticlesData, selectArticles } from '../../store/articles';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import MainFeaturedArticle from '../mainarticle/MainArticle';
+import { getArticlesData, selectArticles } from '../../store/articles';
 import Articles from '../articles/Articles';
 
 const mainFeaturedArticle = {
@@ -19,8 +12,6 @@ const mainFeaturedArticle = {
   imageText: 'main image description',
   linkText: 'Continue reading…',
 };
-
-const theme = createTheme();
 
 export default function Blog() {
   const articles = useSelector(selectArticles);
@@ -36,16 +27,9 @@ export default function Blog() {
   if (articles) console.log(articles);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        <Header />
-        <main>
-          <MainFeaturedArticle post={mainFeaturedArticle} />
-          <Articles articles={articles} />
-        </main>
-      </Container>
-      <Footer />
-    </ThemeProvider>
+    <main>
+      <MainFeaturedArticle post={mainFeaturedArticle} />
+      <Articles articles={articles} />
+    </main>
   );
 }

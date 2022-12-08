@@ -1,21 +1,31 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Container } from "@mui/material";
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 import Home from './components/home/Home';
+import Auth from './components/auth/Auth';
+
+const theme = createTheme();
 
 function Application() {
   return (
     <Router>
-      <Container maxwidth="xl">
-        
-        <Routes>
-          <Route exact path="/" element={<Navigate to="/articles" />} />
-          <Route exact path="/articles" element={<Home />} />
-          
-        </Routes>
-        
-      </Container>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container maxWidth="lg">
+          <Header />
+          <Routes>
+            <Route exact path="/" element={<Navigate to="/articles" />} />
+            <Route exact path="/articles" element={<Home />} />
+            <Route exact path="/auth" element={<Auth />} />
+          </Routes>
+        </Container>
+        <Footer />
+      </ThemeProvider>
     </Router>
   );
 }
