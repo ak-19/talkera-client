@@ -13,7 +13,7 @@ const mainFeaturedArticle = {
   linkText: 'Continue reading…',
 };
 
-export default function Blog() {
+export default function Home() {
   const articles = useSelector(selectArticles);
   const dispatch = useDispatch();
 

@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import  { getArticles } from '../api/index'
+import { getArticles } from '../api/index'
 
 const initialState = { articles: [] };
 
 export const getArticlesData = createAsyncThunk(
   'articles/getArticles',
-  async (amount) => {
+  async () => {
     const response = await getArticles();
     return response.data;
   }
