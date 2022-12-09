@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,16 +13,38 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { loginData } from '../../store/auth';
+import { IconButton, InputAdornment } from '@mui/material';
+import { Visibility } from '@mui/icons-material';
+
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 export default function Auth() {
+    const user = JSON.parse(localStorage.getItem('current_user'))
+    const [showPassword, setShowPassword] = useState(false);
+    const [formData, setFormData] = useState(initialState)
+    const history = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value })
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const { email, password } = formData;
+        dispatch(loginData({ user: { email, password } }), history);
     };
+
+    console.log(user);
+
+    useEffect(() => {
+        if (user) {
+            return history("/articles");
+        }
+    }, [history, user])
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -47,6 +72,8 @@ export default function Auth() {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={handleChange}
+                        value={formData.email}
                     />
                     <TextField
                         margin="normal"
@@ -54,9 +81,18 @@ export default function Auth() {
                         fullWidth
                         name="password"
                         label="Password"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         id="password"
                         autoComplete="current-password"
+                        onChange={handleChange}
+                        value={formData.password}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton onClick={() => setShowPassword(!showPassword)}> <Visibility /></IconButton>
+                                </InputAdornment>
+                            )
+                        }}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
