@@ -25,9 +25,9 @@ function Header(props) {
             href="/"
             sx={{
               mr: 2,
-              fontFamily: 'monospace',
+              fontFamily: 'sans-serif',
               fontWeight: 700,
-              color: 'inherit',
+              color: 'grey',
               textDecoration: 'none',
               flexGrow: 1
             }}>
