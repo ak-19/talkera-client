@@ -32,14 +32,7 @@ export default function Home() {
   const articles = useSelector(selectArticles);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    async function go() {
-      dispatch(getArticlesData());
-    }
-    go();
-  }, [dispatch]);
-
-  if (articles) console.log(articles);
+  useEffect(() => { dispatch(getArticlesData()); }, [dispatch]);
 
   return (
     <main>

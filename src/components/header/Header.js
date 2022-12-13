@@ -1,12 +1,25 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../store/auth';
 
-function Header(props) {
-  const user = JSON.parse(localStorage.getItem('current_user'))
+function Header() {
+  const user = useSelector(state => state?.authReducer?.authData?.user);
+  const history = useNavigate();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(logoutUser(), history);
+    history('/login');
+  };
+
+  useEffect(() => {
+    if (user) return history("/articles");
+  }, [history, user])
 
   return (
     <Fragment>
@@ -36,11 +49,11 @@ function Header(props) {
 
         </Typography>
         {user ? (
-          <Button component={Link} variant="outlined" size="small" to="/auth">
+          <Button component={Link} variant="outlined" size="small" onClick={logout}>
             Logout
           </Button>
         ) : (
-          <Button component={Link} variant="outlined" size="small" to="/auth">
+          <Button component={Link} variant="outlined" size="small" to="/login">
             Sign in
           </Button>
         )}

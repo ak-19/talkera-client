@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -19,8 +19,9 @@ import { Visibility } from '@mui/icons-material';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
-export default function Auth() {
-    const user = JSON.parse(localStorage.getItem('current_user'))
+export default function Auth(props) {
+    const user = useSelector(state => state?.authReducer?.authData?.user);
+
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState(initialState)
     const history = useNavigate();
@@ -31,18 +32,14 @@ export default function Auth() {
         setFormData({ ...formData, [name]: value })
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const { email, password } = formData;
         dispatch(loginData({ user: { email, password } }), history);
     };
 
-    console.log(user);
-
     useEffect(() => {
-        if (user) {
-            return history("/articles");
-        }
+        if (user) return history("/articles");
     }, [history, user])
 
     return (

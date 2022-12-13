@@ -11,6 +11,13 @@ export const loginData = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk(
+  'auth/logoutUser',
+  async () => {
+    return null;
+  }
+);
+
 export const selectAuthData = (state) => {
   return state.articlesReducer?.authData;
 }
@@ -26,6 +33,14 @@ export const authSlice = createSlice({
       .addCase(loginData.fulfilled, (state, action) => {
         localStorage.setItem('current_user', JSON.stringify({ ...action?.payload }));
         state.authData = action.payload;
+      })
+      .addCase(logoutUser.pending, (state) => {
+        localStorage.removeItem('current_user');
+        state.authData = null;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        localStorage.removeItem('current_user');
+        state.authData = null;
       });
   },
 });

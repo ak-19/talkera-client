@@ -12,7 +12,6 @@ API.interceptors.request.use((req) => {
     return req;
 })
 
+export const getArticles = () => API.get(`articles`);
 
-export const getArticles = () => API.get(`articles`)
-
-export const login = (formData) => API.post('/users/login', formData)
+export const login = (formData) => API.post('/users/login', formData);
