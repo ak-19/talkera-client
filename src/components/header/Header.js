@@ -33,9 +33,9 @@ function Header() {
           sx={{ flex: 1 }}
         >
           <Typography
-            component="a"
+            component={Link}
             variant="h3"
-            href="/"
+            to="/articles"
             sx={{
               mr: 2,
               fontFamily: 'sans-serif',
