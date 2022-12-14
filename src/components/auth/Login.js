@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,19 +13,16 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { loginData } from '../../store/auth';
 import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility } from '@mui/icons-material';
 
-const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
-
-export default function Auth(props) {
-    const user = useSelector(state => state?.authReducer?.authData?.user);
-
+export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
-    const [formData, setFormData] = useState(initialState)
+    const [formData, setFormData] = useState({ email: '', password: '' })
+
     const history = useNavigate();
     const dispatch = useDispatch();
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -35,12 +32,7 @@ export default function Auth(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { email, password } = formData;
-        dispatch(loginData({ user: { email, password } }), history);
     };
-
-    useEffect(() => {
-        if (user) return history("/articles");
-    }, [history, user])
 
     return (
         <Container component="main" maxWidth="xs">

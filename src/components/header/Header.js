@@ -3,23 +3,24 @@ import { Fragment, useEffect } from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../store/auth';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+
+
+import { useSelector } from 'react-redux';
 
 function Header() {
-  const user = useSelector(state => state?.authReducer?.authData?.user);
-  const history = useNavigate();
-  const dispatch = useDispatch();
+  const user = null;//useSelector(state => state.authReducer.user);
 
-  const logout = () => {
-    dispatch(logoutUser(), history);
-    history('/login');
-  };
+  const history = useNavigate();
+
+  const logouUser = () => {
+
+    history('/login')
+  }
 
   useEffect(() => {
     if (user) return history("/articles");
-  }, [history, user])
+  }, [user])
 
   return (
     <Fragment>
@@ -48,8 +49,8 @@ function Header() {
           </Typography>
 
         </Typography>
-        {user ? (
-          <Button component={Link} variant="outlined" size="small" onClick={logout}>
+        {user !== null ? (
+          <Button component={Link} variant="outlined" size="small" onClick={logouUser}>
             Logout
           </Button>
         ) : (

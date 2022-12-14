@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MainFeaturedArticle from '../mainarticle/MainArticle';
-import { getArticlesData, selectArticles } from '../../store/articles';
+
 import Articles from '../articles/Articles';
 import { Toolbar } from '@mui/material';
 import Link from '@mui/material/Link';
@@ -29,10 +29,10 @@ const sections = [
 ];
 
 export default function Home() {
-  const articles = useSelector(selectArticles);
+  const articles = [];// useSelector(selectArticles);
   const dispatch = useDispatch();
 
-  useEffect(() => { dispatch(getArticlesData()); }, [dispatch]);
+  // useEffect(() => { dispatch(getArticlesData()); }, [dispatch]);
 
   return (
     <main>

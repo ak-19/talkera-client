@@ -15,3 +15,5 @@ API.interceptors.request.use((req) => {
 export const getArticles = () => API.get(`articles`);
 
 export const login = (formData) => API.post('/users/login', formData);
+export const register = (formData) => API.post('/users/login', formData);
+export const logout = () => localStorage.removeItem("current_user");
