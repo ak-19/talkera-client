@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import MainFeaturedArticle from '../mainarticle/MainArticle';
 
 import Articles from '../articles/Articles';
@@ -30,9 +28,6 @@ const sections = [
 
 export default function Home() {
   const articles = [];// useSelector(selectArticles);
-  const dispatch = useDispatch();
-
-  // useEffect(() => { dispatch(getArticlesData()); }, [dispatch]);
 
   return (
     <main>

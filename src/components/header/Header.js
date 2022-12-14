@@ -1,26 +1,13 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-
-
-import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const user = null;//useSelector(state => state.authReducer.user);
-
-  const history = useNavigate();
-
-  const logouUser = () => {
-
-    history('/login')
-  }
-
-  useEffect(() => {
-    if (user) return history("/articles");
-  }, [user])
+  const logouUser = () => { }
 
   return (
     <Fragment>
