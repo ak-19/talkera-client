@@ -1,56 +1,31 @@
-import MainFeaturedArticle from '../mainarticle/MainArticle';
+import { useEffect, useState } from 'react';
+import { Typography } from '@mui/material';
+
+import { fetchData } from '../../actions/auth';
 
 import Articles from '../articles/Articles';
-import { Toolbar } from '@mui/material';
-import Link from '@mui/material/Link';
-
-const mainFeaturedArticle = {
-  title: 'Title of a longer featured blog post',
-  description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random',
-  imageText: 'main image description',
-  linkText: 'Continue reading…',
-};
-
-const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
-];
+import MainArticle from '../mainarticle/MainArticle';
+import Sections from '../sections/Sections';
 
 export default function Home() {
-  const articles = [];// useSelector(selectArticles);
+  const [articles, setArticles] = useState([]);
+  const [articlesCount, setArticlesCount] = useState(0);
+
+  useEffect(() => { fetchData(setArticles, setArticlesCount); }, [])
 
   return (
     <main>
-      <Toolbar
-        component="nav"
-        variant="dense"
-        sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
-      >
-        {sections.map((section) => (
-          <Link
-            color="inherit"
-            noWrap
-            key={section.title}
-            variant="body2"
-            href={section.url}
-            sx={{ p: 1, flexShrink: 0 }}
-          >
-            {section.title}
-          </Link>
-        ))}
-      </Toolbar>
-      <MainFeaturedArticle post={mainFeaturedArticle} />
+      <Sections />
+      <MainArticle />
       <Articles articles={articles} />
+      <Typography variant="subtitle1" gutterBottom sx={{ textAlign: 'center', marginTop: '50px' }}>
+        <Typography variant="caption" display="block" gutterBottom>
+          Number of articles
+        </Typography>
+        <Typography variant="caption" display="block" gutterBottom>
+          {articlesCount}
+        </Typography>
+      </Typography>
     </main>
   );
 }

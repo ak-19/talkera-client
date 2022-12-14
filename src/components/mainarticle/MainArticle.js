@@ -1,14 +1,20 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
-function MainFeaturedArticle(props) {
-  const { post } = props;
+const post = {
+  title: 'Title of a longer featured blog post',
+  description:
+    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+  image: 'https://source.unsplash.com/random',
+  imageText: 'main image description',
+  linkText: 'Continue reading…',
+};
 
+function MainFeaturedArticle() {
   return (
     <Paper
       sx={{
@@ -58,15 +64,5 @@ function MainFeaturedArticle(props) {
     </Paper>
   );
 }
-
-MainFeaturedArticle.propTypes = {
-  post: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    imageText: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default MainFeaturedArticle;
