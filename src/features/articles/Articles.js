@@ -1,7 +1,7 @@
 
 import { Grid } from '@mui/material'
 import React from 'react'
-import Article from '../article/Article'
+import Article from './Article'
 
 export default function Articles({ articles }) {
     return (

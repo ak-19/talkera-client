@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { Typography } from '@mui/material';
 
-import { retrieveArticles } from '../../features/articleReducer';
+import { retrieveArticles } from '../../features/articles/articleReducer';
 
-import Articles from '../articles/Articles';
+import Articles from '../../features/articles/Articles';
 import MainArticle from '../mainarticle/MainArticle';
-import Sections from '../sections/Sections';
+import Sections from '../../features/sections/Sections';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => { dispatch(retrieveArticles()) }, [])
+  useEffect(() => { dispatch(retrieveArticles()) }, [dispatch])
 
   return (
     <main>
