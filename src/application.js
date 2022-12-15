@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Home from './components/home/Home';
-import Login from './components/auth/Login';
+import Login from './features/authentication/Login';
 
 const theme = createTheme();
 

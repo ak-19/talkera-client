@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -15,14 +15,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility } from '@mui/icons-material';
+import { loginUser } from './authReducer';
 
 export default function Login() {
+    const user = useSelector(state => state.authentication.user)
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({ email: '', password: '' })
 
     const history = useNavigate();
     const dispatch = useDispatch();
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,8 +32,10 @@ export default function Login() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { email, password } = formData;
+        dispatch(loginUser({ user: formData }))
     };
+
+    if (user) return <Navigate to="/articles" />
 
     return (
         <Container component="main" maxWidth="xs">
