@@ -4,10 +4,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../features/authentication/authReducer';
 
 function Header() {
-  const user = null;//useSelector(state => state.authReducer.user);
-  const logouUser = () => { }
+  const user = useSelector(state => state.authentication.user);
+  const dispatch = useDispatch();
+  const logout = () => dispatch(logoutUser());
 
   return (
     <Fragment>
@@ -37,7 +40,7 @@ function Header() {
 
         </Typography>
         {user !== null ? (
-          <Button component={Link} variant="outlined" size="small" onClick={logouUser}>
+          <Button component={Link} variant="outlined" size="small" onClick={logout}>
             Logout
           </Button>
         ) : (

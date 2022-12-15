@@ -1,20 +1,12 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { Navigate } from 'react-router-dom';
+
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility } from '@mui/icons-material';
+
+import { Avatar, Box, Button, CssBaseline, Checkbox, TextField, Grid, Link, Container, Typography, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
+
 import { loginUser } from './authReducer';
 
 export default function Login() {
@@ -22,7 +14,6 @@ export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({ email: '', password: '' })
 
-    const history = useNavigate();
     const dispatch = useDispatch();
 
     const handleChange = (e) => {

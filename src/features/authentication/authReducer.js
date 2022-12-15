@@ -14,6 +14,11 @@ export const loginUser = createAsyncThunk(
     }
 )
 
+export const logoutUser = (state) => {
+    state.user = null;
+    state.authenticated = false;
+}
+
 const authenticationSlice = createSlice({
     name: 'authentication',
     initialState,
