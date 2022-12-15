@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Typography } from '@mui/material';
 
-import { fetchData } from '../../actions/auth';
+import { retrieveArticles } from '../../features/articleReducer';
 
 import Articles from '../articles/Articles';
 import MainArticle from '../mainarticle/MainArticle';
 import Sections from '../sections/Sections';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
-  const [articles, setArticles] = useState([]);
-  const [articlesCount, setArticlesCount] = useState(0);
+  const { articles, articlesCount } = useSelector(state => state.articles)
 
-  useEffect(() => { fetchData(setArticles, setArticlesCount); }, [])
+  const dispatch = useDispatch();
+
+  useEffect(() => { dispatch(retrieveArticles()) }, [])
 
   return (
     <main>
