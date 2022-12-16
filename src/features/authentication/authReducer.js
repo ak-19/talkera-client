@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login } from "../../api";
+import { login, register } from "../../api";
 
 const initialState = {
     user: localStorage.getItem('current_user') ? JSON.parse(localStorage.getItem('current_user')) : null,
@@ -11,6 +11,14 @@ export const loginUser = createAsyncThunk(
     'articles/loginUser',
     async (formData) => {
         const response = await login(formData);
+        return response.data;
+    }
+)
+
+export const signupUser = createAsyncThunk(
+    'articles/signupUser',
+    async (formData) => {
+        const response = await register(formData);
         return response.data;
     }
 )
@@ -42,6 +50,18 @@ const authenticationSlice = createSlice({
             }).addCase(loginUser.rejected, (state, { error }) => {
                 console.log(error);
                 state.error = 'Login failed';
+            })
+            .addCase(signupUser.fulfilled, (state, action) => {
+                const { user } = action.payload;
+                if (user) {
+                    state.user = user;
+                    localStorage.setItem('current_user', JSON.stringify(user))
+                    state.authenticated = true;
+                    state.error = null;
+                }
+            }).addCase(signupUser.rejected, (state, { error }) => {
+                console.log(error);
+                state.error = 'Signup failed';
             })
     },
 });
