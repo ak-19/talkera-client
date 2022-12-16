@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { login } from "../../api";
 
 const initialState = {
-    user: null,
-    authenticated: false,
+    user: localStorage.getItem('current_user') ? JSON.parse(localStorage.getItem('current_user')) : null,
+    authenticated: localStorage.getItem('current_user') !== null,
     error: null
 }
 
@@ -15,17 +15,17 @@ export const loginUser = createAsyncThunk(
     }
 )
 
-export const logoutUser = (state) => {
-    state.user = null;
-    state.authenticated = false;
-    state.error = null;
-}
-
 const authenticationSlice = createSlice({
     name: 'authentication',
     initialState,
     reducers: {
         clearAuthenticationError(state) {
+            state.error = null;
+        },
+        logoutUser(state) {
+            state.user = null;
+            localStorage.clear();
+            state.authenticated = false;
             state.error = null;
         }
     },
@@ -35,6 +35,7 @@ const authenticationSlice = createSlice({
                 const { user } = action.payload;
                 if (user) {
                     state.user = user;
+                    localStorage.setItem('current_user', JSON.stringify(user))
                     state.authenticated = true;
                     state.error = null;
                 }
@@ -45,7 +46,6 @@ const authenticationSlice = createSlice({
     },
 });
 
-export const { clearAuthenticationError } = authenticationSlice.actions;
-
+export const { clearAuthenticationError, logoutUser } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;
