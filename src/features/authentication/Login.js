@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Visibility } from '@mui/icons-material';
@@ -98,7 +99,7 @@ export default function Login() {
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link to="/signup" component={RouterLink}>
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
