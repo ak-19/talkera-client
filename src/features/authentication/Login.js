@@ -5,12 +5,12 @@ import { Navigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Visibility } from '@mui/icons-material';
 
-import { Avatar, Box, Button, CssBaseline, Checkbox, TextField, Grid, Link, Container, Typography, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
+import { Avatar, Box, Button, CssBaseline, Checkbox, TextField, Grid, Link, Container, Typography, IconButton, InputAdornment, FormControlLabel, Alert, AlertTitle } from '@mui/material';
 
-import { loginUser } from './authReducer';
+import { clearAuthenticationError, loginUser } from './authReducer';
 
 export default function Login() {
-    const user = useSelector(state => state.authentication.user)
+    const { user, error } = useSelector(state => state.authentication)
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({ email: '', password: '' })
 
@@ -18,7 +18,8 @@ export default function Login() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value })
+        if (error) dispatch(clearAuthenticationError());
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = async (event) => {
@@ -81,6 +82,7 @@ export default function Login() {
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
                     />
+                    {error && <Alert severity="error"><AlertTitle>Error</AlertTitle> {error} </Alert>}
                     <Button
                         type="submit"
                         fullWidth

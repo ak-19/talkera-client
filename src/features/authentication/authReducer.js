@@ -3,7 +3,8 @@ import { login } from "../../api";
 
 const initialState = {
     user: null,
-    authenticated: false
+    authenticated: false,
+    error: null
 }
 
 export const loginUser = createAsyncThunk(
@@ -17,23 +18,34 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = (state) => {
     state.user = null;
     state.authenticated = false;
+    state.error = null;
 }
 
 const authenticationSlice = createSlice({
     name: 'authentication',
     initialState,
     reducers: {
+        clearAuthenticationError(state) {
+            state.error = null;
+        }
     },
     extraReducers: (builder) => {
-        builder.addCase(loginUser.fulfilled, (state, action) => {
-            const { user } = action.payload;
-            if (user) {
-                state.user = user;
-                state.authenticated = true;
-            }
-        })
+        builder
+            .addCase(loginUser.fulfilled, (state, action) => {
+                const { user } = action.payload;
+                if (user) {
+                    state.user = user;
+                    state.authenticated = true;
+                    state.error = null;
+                }
+            }).addCase(loginUser.rejected, (state, { error }) => {
+                console.log(error);
+                state.error = 'Login failed';
+            })
     },
 });
+
+export const { clearAuthenticationError } = authenticationSlice.actions;
 
 
 export default authenticationSlice.reducer;
