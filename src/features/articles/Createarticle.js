@@ -1,7 +1,8 @@
 import React from 'react'
+import MuiMarkdown from 'mui-markdown';
 
 export default function Createarticle() {
     return (
-        <div>Create new article here</div>
+        <MuiMarkdown>{`# Hello markdown`}</MuiMarkdown>
     )
 }
