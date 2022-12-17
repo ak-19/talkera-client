@@ -13,6 +13,7 @@ API.interceptors.request.use((req) => {
 })
 
 export const getArticles = () => API.get(`articles`);
+export const getFeed = () => API.get(`feed`);
 
 export const login = (formData) => API.post('/users/login', formData);
 export const register = (formData) => API.post('/users', formData);

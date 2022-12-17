@@ -9,6 +9,7 @@ import Footer from './components/footer/Footer';
 import Home from './components/home/Home';
 import Login from './features/authentication/Login';
 import SignUp from './features/authentication/Signup';
+import Feed from './features/articles/Feed';
 
 const theme = createTheme();
 
@@ -24,6 +25,7 @@ function Application() {
             <Route exact path="/articles" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/feed" element={<Feed />} />
           </Routes>
         </Container>
         <Footer />
