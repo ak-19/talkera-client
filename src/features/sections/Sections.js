@@ -1,39 +1,34 @@
-import { Toolbar } from '@mui/material';
+import { Button, Toolbar } from '@mui/material';
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const sections = [
-    { title: 'Technology', url: '#' },
-    { title: 'Design', url: '#' },
-    { title: 'Culture', url: '#' },
-    { title: 'Business', url: '#' },
-    { title: 'Politics', url: '#' },
-    { title: 'Opinion', url: '#' },
-    { title: 'Science', url: '#' },
-    { title: 'Health', url: '#' },
-    { title: 'Style', url: '#' },
-    { title: 'Travel', url: '#' },
-];
-
 export default function Sections() {
+    const { authenticated } = useSelector(state => state.authentication);
+
+    if (!authenticated) return <div></div>;
+
     return (
         <Toolbar
             component="nav"
             variant="dense"
-            sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
-        >
-            {sections.map((section) => (
-                <Link
-                    color="inherit"
-                    nowrap='true'
-                    key={section.title}
-                    variant="body2"
-                    href={section.url}
-                    sx={{ p: 1, flexShrink: 0 }}
-                >
-                    {section.title}
-                </Link>
-            ))}
+            sx={{ justifyContent: 'space-between', overflowX: 'auto' }}>
+            <Button
+                component={Link}
+                nowrap='true'
+                variant="text"
+                to="/feed"
+                sx={{ p: 1, flexShrink: 0 }}>
+                My feed
+            </Button>
+            <Button
+                component={Link}
+                nowrap='true'
+                variant="text"
+                to="/add"
+                sx={{ p: 1, flexShrink: 0 }}>
+                Add article
+            </Button>
         </Toolbar>
     )
 }
