@@ -9,7 +9,7 @@ const takeTen = (s) => {
   return s.substring(0, 10) + '....'
 }
 
-function Article({ article }) {
+function ArticleShortBox({ article }) {
   return (
     <Grid item xs={12} md={6}>
       <CardActionArea component={Link} to={`/article/${article.id}`}>
@@ -37,4 +37,4 @@ function Article({ article }) {
   );
 }
 
-export default Article;
+export default ArticleShortBox;

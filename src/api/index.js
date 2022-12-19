@@ -3,8 +3,8 @@ import axios from 'axios';
 const API = axios.create({ baseURL: 'http://localhost:8080/api' })
 
 API.interceptors.request.use((req) => {
-    if (localStorage.getItem('profile')) {
-        const profile = JSON.parse(localStorage.getItem('profile'))
+    if (localStorage.getItem('current_user')) {
+        const profile = JSON.parse(localStorage.getItem('current_user'))
         const token = profile.token
         req.headers.Authorization = `Bearer ${token}`
     }
@@ -12,6 +12,7 @@ API.interceptors.request.use((req) => {
     return req;
 })
 
+export const createArticle = (formData) => API.post('/articles', formData);
 export const getArticles = () => API.get(`articles`);
 export const getFeed = () => API.get(`feed`);
 

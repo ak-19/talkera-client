@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
-import Article from "../Article";
+import ArticleShortBox from "../detail/Articleshortbox";
 
 export default function Feed() {
     const { feed } = useSelector(state => state.articles);
@@ -8,7 +8,7 @@ export default function Feed() {
     return (
         <Grid container spacing={4}>
             {feed.map((article) => (
-                <Article key={article.id} article={article} />
+                <ArticleShortBox key={article.id} article={article} />
             ))}
         </Grid>
     )

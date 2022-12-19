@@ -10,7 +10,7 @@ import Home from './components/home/Home';
 import Login from './features/authentication/Login';
 import SignUp from './features/authentication/Signup';
 import Feed from './features/articles/list/Feed';
-import ArticleDetails from './features/articles/Articledetails';
+import ArticleDetails from './features/articles/detail/Articledetails';
 import Createarticle from './features/articles/create/Createarticle';
 
 const theme = createTheme();
