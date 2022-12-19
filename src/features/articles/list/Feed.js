@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
-import Article from "./Article";
+import Article from "../Article";
 
 export default function Feed() {
     const { feed } = useSelector(state => state.articles);

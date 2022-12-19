@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 
 import { retrieveArticles } from '../../features/articles/articleReducer';
 
-import Articles from '../../features/articles/Articles';
+import Articles from '../../features/articles/list/Articles';
 import MainArticle from '../mainarticle/MainArticle';
 import Sections from '../../features/sections/Sections';
 import { useDispatch, useSelector } from 'react-redux';
