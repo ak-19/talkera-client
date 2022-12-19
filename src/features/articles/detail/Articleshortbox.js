@@ -12,7 +12,7 @@ const takeTen = (s) => {
 function ArticleShortBox({ article }) {
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component={Link} to={`/article/${article.id}`}>
+      <CardActionArea component={Link} to={`/article/${article.slug}`}>
         <Card sx={{ display: 'flex' }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">

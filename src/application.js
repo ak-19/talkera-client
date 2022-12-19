@@ -29,7 +29,7 @@ function Application() {
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/feed" element={<Feed />} />
             <Route exact path="/add" element={<Createarticle />} />
-            <Route exact path="/article/:id" element={<ArticleDetails />} />
+            <Route exact path="/article/:slug" element={<ArticleDetails />} />
           </Routes>
         </Container>
         <Footer />

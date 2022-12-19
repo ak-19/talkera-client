@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { createArticle, getArticles, getFeed } from '../../api'
+import { createArticle, getArticleBySlug, getArticles, getFeed } from '../../api'
 
 const initialState = {
     article: null,
@@ -34,6 +34,14 @@ export const makeArticle = createAsyncThunk(
     }
 )
 
+export const getBySlug = createAsyncThunk(
+    'articles/getBySlug',
+    async (slug) => {
+        const response = await getArticleBySlug(slug)
+        return response.data
+    }
+)
+
 const artclesSlice = createSlice({
     name: 'articles',
     initialState,
@@ -59,6 +67,12 @@ const artclesSlice = createSlice({
             state.error = null;
         }).addCase(makeArticle.rejected, (state, action) => {
             state.error = 'Creation of article failed';
+        }).addCase(getBySlug.fulfilled, (state, action) => {
+            const { article } = action.payload;
+            state.article = article;
+            state.error = null;
+        }).addCase(getBySlug.rejected, (state, action) => {
+            state.error = 'Getting of article by slug failed';
         })
     },
 })

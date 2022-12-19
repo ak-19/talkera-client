@@ -12,6 +12,7 @@ API.interceptors.request.use((req) => {
     return req;
 })
 
+export const getArticleBySlug = (slug) => API.get(`/articles/${slug}`);
 export const createArticle = (formData) => API.post('/articles', formData);
 export const getArticles = () => API.get(`articles`);
 export const getFeed = () => API.get(`feed`);
