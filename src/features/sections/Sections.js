@@ -17,6 +17,14 @@ export default function Sections() {
                 component={Link}
                 nowrap='true'
                 variant="text"
+                to="/profiles"
+                sx={{ p: 1, flexShrink: 0 }}>
+                Profiles
+            </Button>
+            <Button
+                component={Link}
+                nowrap='true'
+                variant="text"
                 to="/feed"
                 sx={{ p: 1, flexShrink: 0 }}>
                 My feed

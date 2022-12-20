@@ -20,3 +20,6 @@ export const getFeed = () => API.get(`feed`);
 export const login = (formData) => API.post('/users/login', formData);
 export const register = (formData) => API.post('/users', formData);
 export const logout = () => localStorage.removeItem("current_user");
+
+
+export const getAllProfiles = () => API.get(`profile`);

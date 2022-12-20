@@ -12,6 +12,7 @@ import SignUp from './features/authentication/Signup';
 import Feed from './features/articles/list/Feed';
 import ArticleDetails from './features/articles/detail/Articledetails';
 import Createarticle from './features/articles/create/Createarticle';
+import Profiles from './features/profiles/Profiles';
 
 const theme = createTheme();
 
@@ -30,6 +31,7 @@ function Application() {
             <Route exact path="/feed" element={<Feed />} />
             <Route exact path="/add" element={<Createarticle />} />
             <Route exact path="/article/:slug" element={<ArticleDetails />} />
+            <Route exact path="/profiles" element={<Profiles />} />
           </Routes>
         </Container>
         <Footer />
