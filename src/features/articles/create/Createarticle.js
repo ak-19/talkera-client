@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Typography, TextField, Grid, Container, CssBaseline, Paper, Button, Alert, AlertTitle } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { clearError, makeArticle } from '../articleReducer';
 
 export default function Createarticle() {
@@ -9,6 +9,7 @@ export default function Createarticle() {
     const { error } = useSelector(state => state.articles);
     const [formData, setFormData] = useState({ title: '', description: '', body: '' });
     const dispatch = useDispatch();
+    const history = useNavigate();
 
     if (!authenticated) return <Navigate to="/articles" />;
 
@@ -21,6 +22,7 @@ export default function Createarticle() {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(makeArticle({ article: formData }))
+        history('/articles');
     };
 
     return (

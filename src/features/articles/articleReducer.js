@@ -64,6 +64,8 @@ const artclesSlice = createSlice({
         }).addCase(makeArticle.fulfilled, (state, action) => {
             const { article } = action.payload;
             state.article = article;
+            state.articles.push(article);
+            state.articlesCount++;
             state.error = null;
         }).addCase(makeArticle.rejected, (state, action) => {
             state.error = 'Creation of article failed';
